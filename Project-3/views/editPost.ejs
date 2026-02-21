@@ -1,0 +1,19 @@
+<h2>Edit Post</h2>
+
+<form action="/edit/<%= post._id %>" method="POST" enctype="multipart/form-data">
+    
+    <input 
+        type="text" 
+        name="caption" 
+        value="<%= post.caption %>" 
+        required
+    >
+
+    <p>Current Image:</p>
+    <img src="<%= post.image %>" width="100%" style="margin-bottom:15px;">
+
+    <p>Upload New Image (optional):</p>
+    <input type="file" name="image">
+
+    <button type="submit">Update Post</button>
+</form>

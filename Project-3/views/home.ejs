@@ -1,0 +1,60 @@
+<h2>Feed</h2>
+
+<% if(posts.length === 0) { %>
+    <p style="text-align:center;">No posts yet.</p>
+<% } %>
+
+<% posts.forEach(post => { %>
+    <div class="card">
+
+        <img src="<%= post.image %>">
+
+        <div class="card-content">
+            <h3><%= post.caption %></h3>
+            <p>Posted by <strong><%= post.user.username %></strong></p>
+
+            <div style="margin-top:10px;">
+
+               
+            <a href="/like/<%= post._id %>" style="text-decoration:none;margin-right:15px;font-size:18px;">
+
+                <% if (post.likes.includes(user._id)) { %>
+                    <span style="color:red;">&#10084;</span>
+                <% } else { %>
+                    <span style="color:gray;">&#10084;</span>
+                <% } %>
+
+                <%= post.likes.length %>
+            </a>
+
+                
+                <% if (user && user._id == post.user._id.toString()) { %>
+
+                    <a class="delete-btn" href="/delete/<%= post._id %>">
+                        Delete
+                    </a>
+
+                    <a 
+                        href="/edit/<%= post._id %>" 
+                        style="margin-left:10px;padding:6px 12px;background:green;color:white;text-decoration:none;border-radius:4px;"
+                    >
+                        Edit
+                    </a>
+
+                <% } %>
+
+            </div>
+
+        </div>
+    </div>
+<% }) %>
+
+<% if(totalPages > 1) { %>
+<div class="pagination">
+    <% for (let i = 1; i <= totalPages; i++) { %>
+        <a href="/?page=<%= i %>" class="<%= currentPage === i ? 'active' : '' %>">
+            <%= i %>
+        </a>
+    <% } %>
+</div>
+<% } %>
